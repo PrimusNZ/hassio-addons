@@ -20,5 +20,5 @@
   "schema": {
     "client_secrets": "str"
   },
-  "image": "PrimusNZ/{arch}-google-assistant-webserver"
+  "image": "iownsu/{arch}-google-assistant-webserver"
 }
