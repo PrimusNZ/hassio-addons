@@ -39,7 +39,7 @@ class BroadcastMessage(Resource):
         text_query = 'broadcast '+message
         response_text, response_html = assistant.assist(text_query=text_query)
         logging.debug(response_text)
-        return {'status': 'OK'}
+        return {'status': 'OK' }
 
 api.add_resource(BroadcastMessage, '/broadcast_message')
 
@@ -48,7 +48,10 @@ class Command(Resource):
         message = request.args.get('message', default = 'This is a test!')
         response_text, response_html = assistant.assist(text_query=message)
         logging.debug(response_text)
-        return {'status': 'OK'}
+        return jsonify(
+            status="OK",
+            response=response_text
+        )
 
 api.add_resource(Command, '/command')
 
@@ -129,7 +132,7 @@ class GoogleTextAssistant(object):
                 conversation_state = resp.dialog_state_out.conversation_state
                 self.conversation_state = conversation_state
             if resp.dialog_state_out.supplemental_display_text:
-                text_response = resp.dialog_state_out.supplemental_display_text()
+                text_response = resp.dialog_state_out.supplemental_display_text
         return text_response, html_response
 
 if __name__ == '__main__':
@@ -150,6 +153,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
 
     # Create the text assistant
-    assistant = GoogleTextAssistant('en-US', 'HA_GA', 'HA_GA_TEXT_SERVER',
+    assistant = GoogleTextAssistant('en-AU', 'HA_GA', 'HA_GA_TEXT_SERVER',
                              True, grpc_channel, DEFAULT_GRPC_DEADLINE)
     app.run(host='0.0.0.0')
