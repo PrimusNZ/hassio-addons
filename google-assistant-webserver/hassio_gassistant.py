@@ -49,6 +49,7 @@ class Command(Resource):
         response_text, response_html = assistant.assist(text_query=message)
         logging.debug(response_text)
         return jsonify(
+            query=message,
             status="OK",
             response=response_text
         )
