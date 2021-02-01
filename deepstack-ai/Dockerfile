@@ -42,7 +42,7 @@ COPY deepstack/server /app/server
 
 RUN cd /app/server && go build
 
-RUN apt-get remove -y --purge python3-pip python3-dev
+RUN apt-get autoremove -y --purge golang
 RUN apt-get clean -y
 RUN rm -rf /var/lib/apt/lists/*
 
