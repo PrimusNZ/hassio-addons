@@ -1,5 +1,5 @@
 {
   "build_from": {
-    "amd64": "deepquestai/deepstack-base:cpu-412378893"
+    "amd64": "deepquestai/deepstack:noavx"
   }
 }
