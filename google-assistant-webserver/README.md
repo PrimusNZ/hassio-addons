@@ -9,7 +9,7 @@ Community discussion can be found [here](https://community.home-assistant.io/t/c
 Add-on Installation
 --------------------------
 
-1. Add the hassio-addons repo to Hassio addons page: https://github.com/AndBobsYourUncle/hassio-addons
+1. Add the hassio-addons repo to Hassio addons page: https://github.com/PrimusNZ/hassio-addons
 2. Follow the [google assistant](https://www.home-assistant.io/addons/google_assistant/) directions from 1-3 including renaming the JSON file and moving it to the /share/ location in your Hassio instance. 
 3. Start the addon, and open the web UI (http://[your.hassio.IP]:9324).
 4. Click the "authentication" link on the page, and confirm your login with your google account. 
