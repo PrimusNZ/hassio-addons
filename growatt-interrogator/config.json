@@ -9,11 +9,11 @@
   "arch": ["armhf", "amd64"],
   "map": ["share"],
   "options": {
-    "pvoutput_enabled": true
-    "pvoutput_systemid": ""
-    "pvoutput_apikey": ""
-    "owm_key": ""
-    "owm_lat": ""
+    "pvoutput_enabled": true,
+    "pvoutput_systemid": "",
+    "pvoutput_apikey": "",
+    "owm_key": "",
+    "owm_lat": "",
     "owm_long": ""
   },
   "schema": {
@@ -22,7 +22,7 @@
     "pvoutput_apikey": "str?",
     "owm_key": "str?",
     "owm_lat": "str?",
-    "owm_long": "str?",
+    "owm_long": "str?"
   },
   "uart": true
 }
