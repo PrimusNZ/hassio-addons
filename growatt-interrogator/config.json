@@ -17,12 +17,12 @@
     "owm_long": ""
   },
   "schema": {
-    "pvoutput_enabled": "bool"
-    "pvoutput_systemid": "str?"
-    "pvoutput_apikey": "str?"
-    "owm_key": "str?"
-    "owm_lat": "str?"
-    "owm_long": "str?"
+    "pvoutput_enabled": "bool",
+    "pvoutput_systemid": "str?",
+    "pvoutput_apikey": "str?",
+    "owm_key": "str?",
+    "owm_lat": "str?",
+    "owm_long": "str?",
   },
-  "uart": true,
+  "uart": true
 }
