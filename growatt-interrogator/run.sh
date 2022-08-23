@@ -39,6 +39,4 @@ MQTTUser=$MQTT_USER
 MQTTPass=$MQTT_PASSWORD
 EOF
 
-cat /tmp/pvinverter.cfg
-
 exec python3 /pv_inverter.py < /dev/null
