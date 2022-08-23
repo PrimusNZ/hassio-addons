@@ -8,7 +8,7 @@ from time import strftime
 import time
 from configobj import ConfigObj
 from pymodbus.client.sync import ModbusSerialClient as ModbusClient
-from os import system
+import os
 from paho.mqtt import client as mqtt_client
 import random
 import threading
@@ -16,7 +16,7 @@ import signal
 import requests
 
 # read settings from config file
-config = ConfigObj("/root/pvoutput.txt")
+config = ConfigObj("/tmp/pvinverter.cfg")
 InverterPort = config['Inverter']
 MqttBroker = config['MQTTBroker']
 MqttPort = int(config['MQTTPort'])
@@ -24,7 +24,7 @@ MqttUser = config['MQTTUser']
 MqttPass = config['MQTTPass']
 
 # PVOutput Configurations
-PVOEnabled = int(config['PVOEnabled'])
+PVOEnabled = bool(config['PVOEnabled'])
 SystemID = config['SystemID']
 APIKey = config['APIKey']
 

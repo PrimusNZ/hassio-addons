@@ -1,13 +1,44 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bashio
 set -e
 
-CONFIG_PATH=/data/options.json
+MQTT_HOST=$(bashio::services mqtt "host")
+MQTT_USER=$(bashio::services mqtt "username")
+MQTT_PASSWORD=$(bashio::services mqtt "password")
 
-CLIENT_SECRETS=$(jq --raw-output '.client_secrets' $CONFIG_PATH)
+PVOEnabled=$(bashio::config pvoutput_enabled)
+PVOSystemID=$(bashio::config pvoutput_systemid)
+PVOAPIKey=$(bashio::config pvoutput_apikey)
 
-if [ ! -f "$CONFIG_PATH" ]; then
-    echo "[Error] You need configure the Growatt Interrogator!"
-    exit 1
-fi
+OWMKey=$(bashio::config owm_key)
+OWMLat=$(bashio::config owm_lat)
+OWMLong=$(bashio::config owm_long)
+
+InverterPort=$(bashio::config inverter_port "/dev/ttyUSB0")
+
+cat > /tmp/pvinverter.cfg <<EOF
+# Register at pvoutput.org to get your SYSTEMID and APIKEY
+PVOEnabled=$PVOEnabled
+SystemID=$PVOSystemID
+APIKey=$PVOAPIKey
+
+# Inverter
+Inverter=$InverterPort
+
+# Register at openweather.org to get your APIKEY
+# If OWMKEY and Longitude and Latitude is not supplied
+# no weather will be read, and tried uploaded to
+# pvoutput.org - together with your energy data.
+OWMKEY=$OWMKey
+Latitude=$OWMLat
+Longitude=$OWMLong
+
+# MQTT For Inverter Interrorgator
+MQTTBroker=$MQTT_HOST
+MQTTPort=1883
+MQTTUser=$MQTT_USER
+MQTTPass=$MQTT_PASSWORD
+EOF
+
+cat /tmp/pvinverter.cfg
 
 exec python3 /pv_inverter.py < /dev/null
