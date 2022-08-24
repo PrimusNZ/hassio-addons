@@ -24,7 +24,7 @@ MqttUser = config['MQTTUser']
 MqttPass = config['MQTTPass']
 
 # PVOutput Configurations
-PVOEnabled = bool(config['PVOEnabled'])
+PVOEnabled = config['PVOEnabled']
 SystemID = config['SystemID']
 APIKey = config['APIKey']
 
@@ -175,7 +175,7 @@ def send_state(client, time_now):
     for key, value in sorted(data.items()):
         publish(client, key, value)
 
-    if PVOEnabled:
+    if PVOEnabled.lower() == 'true':
         if time.time() >= (time_now+300):
             time_now = time.time()
             pv_upload(data)
