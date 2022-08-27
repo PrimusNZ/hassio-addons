@@ -268,10 +268,13 @@ def publish(client,stub,data):
         print("Published '%s' to '%s'" %(data, topic))
 
 def run():
-    print("Growatt Interrogator Initialising")
+    print("Growatt Interrogator Starting")
     print("Verbose: %s" %(Verbose.lower()))
     client = connect_mqtt()
-    print("Up and Running!")
+    print("Using serial port: %s" %(InverterPort))
+    print("Publishing stats to '%s/'" %(MqttStub))
+    print("Listening for charge modes on '%s/%s'" %(MqttStub, MqttTopicCharge))
+    print("Listening for power modes on '%s/%s'" %(MqttStub, MqttTopicPower))
     client.loop_forever()
 
 def set_register(register,value):
