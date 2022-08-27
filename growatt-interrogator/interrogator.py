@@ -269,7 +269,7 @@ def publish(client,stub,data):
 
 def run():
     print("Growatt Interrogator Initialising")
-    print("Verbose: %s", %(Verbose.lower()))
+    print("Verbose: %s" %(Verbose.lower()))
     client = connect_mqtt()
     print("Up and Running!")
     client.loop_forever()
