@@ -28,6 +28,8 @@ PVOEnabled = config['PVOEnabled']
 SystemID = config['SystemID']
 APIKey = config['APIKey']
 
+Verbose = config['Verbose']
+
 
 # Static settings
 MqttStub = "Growatt"
@@ -192,7 +194,8 @@ def pv_upload(data):
     api_headers={'X-Pvoutput-Apikey':APIKey,'X-Pvoutput-SystemId':SystemID}
 
     x = requests.post(url, data = upload, headers = api_headers)
-    print(x.text)
+    if Verbose.lower() == 'true':
+        print("%s %s: Pushed data to PVOutput.org - %s" %(t_date, t_time, x.text))
 
 def connect_mqtt():
     def on_connect(client, userdata, flags, rc):
@@ -226,7 +229,8 @@ def connect_mqtt():
 def on_message(client,userdata,message):
     topic = message.topic
     msg = message.payload.decode("utf-8")
-    print("Received message: '%s' on '%s'" %(msg,topic))
+    if Verbose.lower() == 'true':
+        print("Received message: '%s' on '%s'" %(msg,topic))
 
     valid=False
     try:
@@ -260,10 +264,14 @@ def on_message(client,userdata,message):
 def publish(client,stub,data):
     topic = ('%s/%s' %(MqttStub, stub))
     client.publish(topic, data)
-    #print("Published '%s' to '%s'" %(data, topic))
+    if Verbose.lower() == 'true':
+        print("Published '%s' to '%s'" %(data, topic))
 
 def run():
+    print("Growatt Interrogator Initialising")
+    print("Verbose: %s", %(Verbose.lower()))
     client = connect_mqtt()
+    print("Up and Running!")
     client.loop_forever()
 
 def set_register(register,value):
