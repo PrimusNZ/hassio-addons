@@ -13,7 +13,7 @@ init: false
 options:
   inverter_port: /dev/ttyUSB0
   pvoutput_enabled: false
-  verbose: true
+  verbose: false
 
 schema:
   inverter_port: str
