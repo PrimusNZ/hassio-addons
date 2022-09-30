@@ -129,6 +129,11 @@ def send_state(client, time_now):
     value=input_registers.registers[21]
     data["grid_frequency"]=float(value)/100
 
+    if data["grid_volts"] >= 100:
+        data['grid_connected']="true"
+    else:
+        data['grid_connected']="false"
+
     value=input_registers.registers[22]
     data["inverter_volts"]=float(value)/10
 
