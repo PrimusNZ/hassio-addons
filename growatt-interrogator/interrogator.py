@@ -212,7 +212,7 @@ def connect_mqtt():
             topic2 = ('%s/%s' %(MqttStub, MqttTopicCharge))
             client.subscribe(topic2, qos=0)
 
-            send_state(client, 0)
+            send_state(client)
         else:
             print("Failed to connect, return code %d\n", rc)
             quit()
