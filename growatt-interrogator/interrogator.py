@@ -6,6 +6,7 @@ Script for fetching data from Growatt inverter for MQTT
 import subprocess
 from time import strftime
 import time
+import datetime
 from configobj import ConfigObj
 from pymodbus.client.sync import ModbusSerialClient as ModbusClient
 import os
@@ -42,7 +43,7 @@ client_id = f'inverter-stats-{random.randint(0, 1000)}'
 Inverter = ModbusClient(method='rtu', port=InverterPort, baudrate=9600, stopbits=1, parity='N', bytesize=8, timeout=1)
 Inverter.connect()
 
-def send_state(client, time_now):
+def send_state(client):
   data = dict()
 
   try:
@@ -183,13 +184,13 @@ def send_state(client, time_now):
         publish(client, key, value)
 
     if PVOEnabled.lower() == 'true':
-        if time.time() >= (time_now+300):
-            time_now = time.time()
+        current_time = datetime.datetime.now()
+        if current_time.second % 5 == 0 and current_time.minute % 1 == 0 and current_time.microsecond == 0:
             pv_upload(data)
   except:
     print("Exception while sending state")
 
-  threading.Timer(1,send_state,args=[client,time_now]).start()
+  threading.Timer(1,send_state,args=[client]).start()
 
 def pv_upload(data):
     t_date = format(strftime('%Y%m%d'))
