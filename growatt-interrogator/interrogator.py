@@ -185,7 +185,7 @@ def send_state(client):
 
     if PVOEnabled.lower() == 'true':
         current_time = datetime.datetime.now()
-        if current_time.second % 5 == 0 and current_time.minute % 1 == 0 and current_time.microsecond == 0:
+        if current_time.second == 0 and current_time.minute % 5 == 0:
             pv_upload(data)
   except:
     print("Exception while sending state")
