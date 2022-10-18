@@ -3,18 +3,17 @@
 """
 Script for fetching data from Growatt inverter for MQTT
 """
-import subprocess
 from time import strftime
 import time
 import datetime
 from configobj import ConfigObj
 from pymodbus.client.sync import ModbusSerialClient as ModbusClient
-import os
 from paho.mqtt import client as mqtt_client
 import random
-import threading
-import signal
 import requests
+import sys
+
+from apscheduler.schedulers.background import BackgroundScheduler
 
 # read settings from config file
 config = ConfigObj("/tmp/pvinverter.cfg")
@@ -39,11 +38,19 @@ MqttTopicCharge = "charge_mode"
 ReadRegisters = 101
 client_id = f'inverter-stats-{random.randint(0, 1000)}'
 
+try:
+    Inverter = ModbusClient(method='rtu', port=InverterPort, baudrate=9600, stopbits=1, parity='N', bytesize=8, timeout=1)
+    Inverter.connect()
+except:
+    print("")
+    print("!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("!!! CONNECTION ERROR !!!")
+    print("!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("Failed to connect to inverter on port: %s" %(InverterPort))
+    print("")
+    sys.exit()
 
-Inverter = ModbusClient(method='rtu', port=InverterPort, baudrate=9600, stopbits=1, parity='N', bytesize=8, timeout=1)
-Inverter.connect()
-
-def send_state(client):
+def inverter_read():
   data = dict()
 
   try:
@@ -180,19 +187,20 @@ def send_state(client):
     data["consumption_total"] = data["ac_hist_total"]+data["batt_hist_total"]
     data["consumption_combined"] = data["consumption"]+data["charge_power"]
 
+  except:
+    print("Exception while retrieving state")
+
+  return data
+
+
+def send_mqtt(client):
+    data = inverter_read()
     for key, value in sorted(data.items()):
         publish(client, key, value)
 
-    if PVOEnabled.lower() == 'true':
-        current_time = datetime.datetime.now()
-        if current_time.second == 0 and current_time.minute % 5 == 0:
-            pv_upload(data)
-  except:
-    print("Exception while sending state")
+def pv_upload():
+    data = inverter_read()
 
-  threading.Timer(1,send_state,args=[client]).start()
-
-def pv_upload(data):
     t_date = format(strftime('%Y%m%d'))
     t_time = format(strftime('%H:%M'))
     url="http://pvoutput.org/service/r2/addstatus.jsp"
@@ -212,15 +220,9 @@ def connect_mqtt():
             topic2 = ('%s/%s' %(MqttStub, MqttTopicCharge))
             client.subscribe(topic2, qos=0)
 
-            send_state(client)
         else:
             print("Failed to connect, return code %d\n", rc)
             quit()
-
-    #def on_subscribe(client, userdata, mid, granted_qos):
-    #    print(mid)
-    #    topic = ('%s/%s' %(MqttStub, MqttTopicPower))
-    #    print("Subscribed to '%s'" %(topic))
 
     # Set Connecting Client ID
     client = mqtt_client.Client(client_id)
@@ -278,9 +280,17 @@ def run():
     print("Verbose: %s" %(Verbose.lower()))
     client = connect_mqtt()
     print("Using serial port: %s" %(InverterPort))
-    print("Publishing stats to '%s/'" %(MqttStub))
+    print("Publishing states to '%s/'" %(MqttStub))
     print("Listening for charge modes on '%s/%s'" %(MqttStub, MqttTopicCharge))
     print("Listening for power modes on '%s/%s'" %(MqttStub, MqttTopicPower))
+
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(send_mqtt, 'interval', seconds=1, args=[client])
+    if PVOEnabled.lower() == 'true':
+        scheduler.add_job(pv_upload, 'cron', minute='*/5')
+        print("Scheduled uploads to PVOutput every 5m are enabled")
+    scheduler.start()
+
     client.loop_forever()
 
 def set_register(register,value):
