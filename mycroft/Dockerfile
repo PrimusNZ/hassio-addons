@@ -4,7 +4,8 @@ FROM $BUILD_FROM
 # Install Server Dependencies for Mycroft
 RUN set -x \
 	&& apt-get update \
-	&& apt-get -y install wget git python3 python3-pip locales sudo alsa-utils \
+	&& apt-get -y install wget procps git python3 python3-pip locales sudo \
+    libespeak-ng1 alsa-utils \
 	&& pip3 install future msm \
 	# Checkout Mycroft
 	&& git clone https://github.com/MycroftAI/mycroft-core.git /opt/mycroft \
