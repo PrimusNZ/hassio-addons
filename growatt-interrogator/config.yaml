@@ -25,3 +25,4 @@ schema:
 uart: true
 services:
   - mqtt:want
+image: ghcr.io/primusnz/growatt-interrogator

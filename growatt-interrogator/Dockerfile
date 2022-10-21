@@ -17,3 +17,5 @@ COPY *.py /
 RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
+
+LABEL org.opencontainers.image.source https://github.com/PrimusNZ/hassio-addons
