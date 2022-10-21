@@ -22,15 +22,14 @@ RUN set -x \
 	&& touch /opt/mycroft/scripts/logs/mycroft-audio.log \
 	&& apt-get -y autoremove \
 	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN /opt/mycroft/./bin/mycroft-pip install --upgrade pip \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && /opt/mycroft/./bin/mycroft-pip install --upgrade pip \
     && /opt/mycroft/./bin/mycroft-pip install mycroft-mimic3-tts[all] \
     && /opt/mycroft/./bin/mycroft-pip install mycroft-plugin-tts-mimic3[all]
 
 # Set the locale
-RUN /bin/sed -i "s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/" /etc/locale.gen
-RUN locale-gen en_US.UTF-8
+RUN /bin/sed -i "s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/" /etc/locale.gen \
+    && locale-gen en_US.UTF-8
 ENV USER root
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
@@ -44,11 +43,9 @@ RUN echo "PATH=$PATH:/opt/mycroft/bin" >> $HOME/.bashrc \
         && echo "source /opt/mycroft/.venv/bin/activate" >> $HOME/.bashrc
 
 RUN chmod +x /opt/mycroft/start-mycroft.sh \
-	&& chmod +x /opt/mycroft/startup.sh
-
-
-# Build a cache for first-run!
-RUN mkdir -p /var/cache/mycroft/config \
+	&& chmod +x /opt/mycroft/startup.sh \
+    # Build a cache for first-run!
+    && mkdir -p /var/cache/mycroft/config \
     && mkdir -p /var/cache/mycroft/mycroft \
     && mkdir -p /var/cache/mycroft/local \
     && mkdir -p /root \
@@ -56,15 +53,14 @@ RUN mkdir -p /var/cache/mycroft/config \
     && mkdir -p /root/.local/share \
     && ln -s /var/cache/mycroft/config /root/.config/mycroft \
     && ln -s /var/cache/mycroft/mycroft /root/.mycroft \
-    && ln -s /var/cache/mycroft/local /root/.local/share/mycroft
-
-COPY mycroft.conf /var/cache/mycroft/config
-RUN /opt/mycroft/./bin/mycroft-config set tts.module mimic3_tts_plug \
-    && /opt/mycroft/.venv/bin/mimic3 --preload-voice en_UK/apope_low
-
-RUN rm -f /root/.config/mycroft && ln -s /data/config /root/.config/mycroft \
+    && ln -s /var/cache/mycroft/local /root/.local/share/mycroft \
+    && /opt/mycroft/./bin/mycroft-config set tts.module mimic3_tts_plug \
+    && /opt/mycroft/.venv/bin/mimic3 --preload-voice en_UK/apope_low \
+    && rm -f /root/.config/mycroft && ln -s /data/config /root/.config/mycroft \
     && rm -f /root/.mycroft && ln -s /data/mycroft /root/.mycroft \
     && rm -f /root/.local/share/mycroft && ln -s /data/local /root/.local/share/mycroft
+
+COPY mycroft.conf /var/cache/mycroft/config
 
 EXPOSE 8181
 
