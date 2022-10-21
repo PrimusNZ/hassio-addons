@@ -47,3 +47,5 @@ RUN chmod +x /opt/mycroft/start-mycroft.sh \
 EXPOSE 8181
 
 ENTRYPOINT "/opt/mycroft/startup.sh"
+
+LABEL org.opencontainers.image.source https://github.com/PrimusNZ/hassio-addons
