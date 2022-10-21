@@ -11,4 +11,4 @@ arch:
 init: false
 audio: true
 host_network: true
-image: primusnz/mycroftai
+image: ghcr.io/primusnz/mycroftai
