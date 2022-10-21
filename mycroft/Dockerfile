@@ -16,6 +16,8 @@ RUN set -x \
 	&& CI=true /opt/mycroft/./dev_setup.sh --allow-root -sm \
     && mkdir /etc/mycroft \
 	&& mkdir /opt/mycroft/scripts/logs \
+    && mkdir /root/.config \
+    && ln -s /data /root/.config/mycroft \
 	&& touch /opt/mycroft/scripts/logs/mycroft-bus.log \
 	&& touch /opt/mycroft/scripts/logs/mycroft-voice.log \
 	&& touch /opt/mycroft/scripts/logs/mycroft-skills.log \
@@ -24,7 +26,8 @@ RUN set -x \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN /opt/mycroft/./bin/mycroft-pip install mycroft-mimic3-tts[all] \
+RUN /opt/mycroft/./bin/mycroft-pip install --upgrade pip \
+    && /opt/mycroft/./bin/mycroft-pip install mycroft-mimic3-tts[all] \
     && /opt/mycroft/./bin/mycroft-pip install mycroft-plugin-tts-mimic3[all] \
     && /opt/mycroft/./bin/mycroft-config set tts.module mimic3_tts_plug
 
@@ -46,6 +49,8 @@ RUN echo "PATH=$PATH:/opt/mycroft/bin" >> $HOME/.bashrc \
 
 RUN chmod +x /opt/mycroft/start-mycroft.sh \
 	&& chmod +x /opt/mycroft/startup.sh
+
+RUN /opt/mycroft/.venv/bin/mimic3 --preload-voice en_UK/apope_low
 
 EXPOSE 8181
 
