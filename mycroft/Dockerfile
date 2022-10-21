@@ -13,6 +13,7 @@ RUN set -x \
 	&& mkdir /opt/mycroft/skills \
 	# git fetch && git checkout dev && \ this branch is now merged to master
 	&& CI=true /opt/mycroft/./dev_setup.sh --allow-root -sm \
+    && mkdir /etc/mycroft \
 	&& mkdir /opt/mycroft/scripts/logs \
 	&& touch /opt/mycroft/scripts/logs/mycroft-bus.log \
 	&& touch /opt/mycroft/scripts/logs/mycroft-voice.log \
@@ -22,10 +23,9 @@ RUN set -x \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN wget "https://github.com/MycroftAI/mimic3/releases/download/release%2Fv0.2.3/mycroft-mimic3-tts_0.2.3_amd64.deb" -O /tmp/mycroft-mimic3.deb
-RUN apt-get update && apt install -y /tmp/mycroft-mimic3.deb
-
-RUN /opt/mycroft/./bin/mycroft-pip install mycroft-plugin-tts-mimic3[all] && /opt/mycroft/./bin/mycroft-config set tts.module mimic3_tts_plug
+RUN /opt/mycroft/./bin/mycroft-pip install mycroft-mimic3-tts[all] \
+    && /opt/mycroft/./bin/mycroft-pip install mycroft-plugin-tts-mimic3[all] \
+    && /opt/mycroft/./bin/mycroft-config set tts.module mimic3_tts_plug
 
 # Set the locale
 RUN locale-gen en_US.UTF-8
@@ -35,6 +35,7 @@ ENV LC_ALL en_US.UTF-8
 
 WORKDIR /opt/mycroft
 COPY startup.sh /opt/mycroft
+COPY mycroft.conf /etc/mycroft
 ENV PYTHONPATH $PYTHONPATH:/mycroft/ai
 
 RUN echo "PATH=$PATH:/opt/mycroft/bin" >> $HOME/.bashrc \

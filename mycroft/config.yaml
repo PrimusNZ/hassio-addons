@@ -1,6 +1,6 @@
 ---
 name: Mycroft AI
-version: 0.0.3
+version: 0.0.4
 slug: mycroft
 description: A script to interrogate a Growatt Inverter for power information and publishes to MQTT. - Optionally uploads data to PVOutput
 url: https://github.com/PrimusNZ/hassio-addons/tree/master/mycroft
@@ -11,3 +11,4 @@ arch:
 init: false
 audio: true
 host_network: true
+image: primusnz/mycroftai
