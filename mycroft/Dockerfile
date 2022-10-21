@@ -16,8 +16,6 @@ RUN set -x \
 	&& CI=true /opt/mycroft/./dev_setup.sh --allow-root -sm \
     && mkdir /etc/mycroft \
 	&& mkdir /opt/mycroft/scripts/logs \
-    && mkdir /root/.config \
-    && ln -s /data /root/.config/mycroft \
 	&& touch /opt/mycroft/scripts/logs/mycroft-bus.log \
 	&& touch /opt/mycroft/scripts/logs/mycroft-voice.log \
 	&& touch /opt/mycroft/scripts/logs/mycroft-skills.log \
@@ -28,8 +26,7 @@ RUN set -x \
 
 RUN /opt/mycroft/./bin/mycroft-pip install --upgrade pip \
     && /opt/mycroft/./bin/mycroft-pip install mycroft-mimic3-tts[all] \
-    && /opt/mycroft/./bin/mycroft-pip install mycroft-plugin-tts-mimic3[all] \
-    && /opt/mycroft/./bin/mycroft-config set tts.module mimic3_tts_plug
+    && /opt/mycroft/./bin/mycroft-pip install mycroft-plugin-tts-mimic3[all]
 
 # Set the locale
 RUN /bin/sed -i "s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/" /etc/locale.gen
@@ -41,7 +38,6 @@ ENV LC_ALL en_US.UTF-8
 
 WORKDIR /opt/mycroft
 COPY startup.sh /opt/mycroft
-COPY mycroft.conf /etc/mycroft
 ENV PYTHONPATH $PYTHONPATH:/mycroft/ai
 
 RUN echo "PATH=$PATH:/opt/mycroft/bin" >> $HOME/.bashrc \
@@ -50,7 +46,25 @@ RUN echo "PATH=$PATH:/opt/mycroft/bin" >> $HOME/.bashrc \
 RUN chmod +x /opt/mycroft/start-mycroft.sh \
 	&& chmod +x /opt/mycroft/startup.sh
 
-RUN /opt/mycroft/.venv/bin/mimic3 --preload-voice en_UK/apope_low
+
+# Build a cache for first-run!
+RUN mkdir -p /var/cache/mycroft/config \
+    && mkdir -p /var/cache/mycroft/mycroft \
+    && mkdir -p /var/cache/mycroft/local \
+    && mkdir -p /root \
+    && mkdir -p /root/.config \
+    && mkdir -p /root/.local/share \
+    && ln -s /var/cache/mycroft/config /root/.config/mycroft \
+    && ln -s /var/cache/mycroft/mycroft /root/.mycroft \
+    && ln -s /var/cache/mycroft/local /root/.local/share/mycroft
+
+COPY mycroft.conf /var/cache/mycroft/config
+RUN /opt/mycroft/./bin/mycroft-config set tts.module mimic3_tts_plug \
+    && /opt/mycroft/.venv/bin/mimic3 --preload-voice en_UK/apope_low
+
+RUN rm -f /root/.config/mycroft && ln -s /data/config /root/.config/mycroft \
+    && rm -f /root/.mycroft && ln -s /data/mycroft /root/.mycroft \
+    && rm -f /root/.local/share/mycroft && ln -s /data/local /root/.local/share/mycroft
 
 EXPOSE 8181
 
