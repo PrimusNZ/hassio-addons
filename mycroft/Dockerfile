@@ -25,6 +25,8 @@ RUN set -x \
 RUN wget "https://github.com/MycroftAI/mimic3/releases/download/release%2Fv0.2.3/mycroft-mimic3-tts_0.2.3_amd64.deb" -O /tmp/mycroft-mimic3.deb
 RUN apt-get update && apt install -y /tmp/mycroft-mimic3.deb
 
+RUN /opt/mycroft/./bin/mycroft-pip install mycroft-plugin-tts-mimic3[all] && /opt/mycroft/./bin/mycroft-config set tts.module mimic3_tts_plug
+
 # Set the locale
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
