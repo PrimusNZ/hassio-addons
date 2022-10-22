@@ -45,22 +45,13 @@ RUN echo "PATH=$PATH:/opt/mycroft/bin" >> $HOME/.bashrc \
 RUN chmod +x /opt/mycroft/start-mycroft.sh \
 	&& chmod +x /opt/mycroft/startup.sh \
     # Build a cache for first-run!
-    && mkdir -p /var/cache/mycroft/config \
-    && mkdir -p /var/cache/mycroft/mycroft \
-    && mkdir -p /var/cache/mycroft/local \
-    && mkdir -p /root \
     && mkdir -p /root/.config \
     && mkdir -p /root/.local/share \
-    && ln -s /var/cache/mycroft/config /root/.config/mycroft \
-    && ln -s /var/cache/mycroft/mycroft /root/.mycroft \
-    && ln -s /var/cache/mycroft/local /root/.local/share/mycroft \
-    && /opt/mycroft/./bin/mycroft-config set tts.module mimic3_tts_plug \
-    && /opt/mycroft/.venv/bin/mimic3 --preload-voice en_UK/apope_low \
-    && rm -f /root/.config/mycroft && ln -s /data/config /root/.config/mycroft \
-    && rm -f /root/.mycroft && ln -s /data/mycroft /root/.mycroft \
-    && rm -f /root/.local/share/mycroft && ln -s /data/local /root/.local/share/mycroft
+    && mkdir -p /etc/mycroft \
+    && ln -s /data/conf /root/.config/mycroft \
+    && ln -s /data/local /root/.local/share/mycroft
 
-COPY mycroft.conf /var/cache/mycroft/config
+COPY mycroft.conf /etc/mycroft/mycroft.conf
 
 EXPOSE 8181
 
