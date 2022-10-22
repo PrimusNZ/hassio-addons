@@ -46,12 +46,12 @@ RUN chmod +x /opt/mycroft/start-mycroft.sh \
 	&& chmod +x /opt/mycroft/startup.sh \
     # Build a cache for first-run!
     && mkdir -p /root/.config \
-    && mkdir -p /root/.local/share \
     && mkdir -p /etc/mycroft \
-    && ln -s /data/conf /root/.config/mycroft \
-    && ln -s /data/local /root/.local/share/mycroft
+    && ln -s /data/conf /root/.config/mycroft
 
 COPY mycroft.conf /etc/mycroft/mycroft.conf
+
+RUN /opt/mycroft/.venv/bin/mimic3 --preload-voice en_UK/apope_low
 
 EXPOSE 8181
 
