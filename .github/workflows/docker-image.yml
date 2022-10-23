@@ -8,13 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
-        uses: growatt-interrogator
-      - name: Test build
+        uses: actions/checkout@v3
+      - name: 🏗  Login to GitHub Container Registry
+        uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build
         uses: home-assistant/builder@master
         with:
           args: |
             --test \
             --all \
             --target growatt-interrogator
-
-
