@@ -8,6 +8,9 @@ startup: application
 arch:
   - armhf
   - amd64
+  - i386
+  - armv7
+  - aarch64
 hassio_api: true
 init: false
 options:
