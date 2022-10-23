@@ -13,7 +13,6 @@ jobs:
         uses: home-assistant/builder@master
         with:
           args: |
-            -v ~/.docker:/root/.docker \
             --branch master \
             --all \
             --target growatt-interrogator \
