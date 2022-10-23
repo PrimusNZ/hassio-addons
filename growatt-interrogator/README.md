@@ -1,5 +1,9 @@
 # Growatt Interrogator
 
+## DOES NOT WORK WITH HASSOS
+HassOS lacks certain kernel modules required to correctly communicate with your inverter.
+It is recommended to run this addon on top of [Home Assistant Supervised](https://github.com/home-assistant/supervised-installer)
+
 ## About
 
 A simple (poorly written) python 3 script to interrogate a Growatt Inverter for power information and publishes to MQTT.

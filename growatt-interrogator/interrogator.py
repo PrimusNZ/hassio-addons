@@ -41,9 +41,10 @@ client_id = f'inverter-stats-{random.randint(0, 1000)}'
 try:
     Inverter = ModbusClient(method='rtu', port=InverterPort, baudrate=9600, stopbits=1, parity='N', bytesize=8, timeout=1)
     Inverter.connect()
-    #Sanity Check to encure registrs can be read
+    # Sanity Check to ensure registrs can be read
     Inverter.read_holding_registers(0,3)
     Inverter.read_input_registers(0,3)
+
 except:
     print("")
     print("!!!!!!!!!!!!!!!!!!!!!!!!")
