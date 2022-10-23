@@ -59,7 +59,7 @@ def inverter_read():
 
   try:
     # Sending Current State
-    holding_registers = Inverter.read_holding_registers(0,3)
+    holding_registers = Inverter.read_holding_registers(0,100)
     input_registers = Inverter.read_input_registers(0,ReadRegisters)
 
     state = holding_registers.registers[1]
