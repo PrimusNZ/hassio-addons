@@ -16,6 +16,5 @@ jobs:
             --branch master \
             --all \
             --target growatt-interrogator \
-            --docker-hub ghcr.io \
             --docker-user ${{ github.repository_owner }} \
             --docker-password ${{ secrets.GITHUB_TOKEN }}
