@@ -15,4 +15,4 @@ init: false
 audio: true
 host_network: true
 
-image: ghcr.io/primusnz/{arch}-mycroftai
+image: ghcr.io/primusnz/hassio-addons/{arch}-mycroftai
