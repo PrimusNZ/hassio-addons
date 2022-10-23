@@ -1,8 +1,7 @@
+---
 build_from:
   amd64: ghcr.io/hassio-addons/debian-base/amd64:6.1.1
   armhf: ghcr.io/hassio-addons/debian-base/armhf:6.1.1
   i386: ghcr.io/hassio-addons/debian-base/i386:6.1.1
   armv7: ghcr.io/hassio-addons/debian-base/armv7:6.1.1
   arch64: ghcr.io/hassio-addons/debian-base/aarch64:6.1.1
-image: ghcr.io/primusnz/{arch}-growatt-interrogator
-shadow_repository: "ghcr.io/PrimusNZ"
