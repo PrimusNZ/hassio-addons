@@ -8,7 +8,10 @@ startup: application
 arch:
   - armhf
   - amd64
+  - i386
+  - armv7
+  - aarch64
 init: false
 audio: true
 host_network: true
-image: ghcr.io/primusnz/mycroftai
+image: ghcr.io/primusnz/{arch}-mycroftai
