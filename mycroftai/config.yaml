@@ -6,10 +6,7 @@ description: Mycroft is an open source privacy-focused voice assistant. It can b
 url: https://github.com/PrimusNZ/hassio-addons/tree/master/mycroft
 startup: application
 arch:
-  - armhf
   - amd64
-  - i386
-  - armv7
   - aarch64
 init: false
 audio: true
