@@ -1,7 +1,0 @@
----
-build_from:
-  amd64: ghcr.io/hassio-addons/debian-base/amd64:6.1.2
-  armhf: ghcr.io/hassio-addons/debian-base/armhf:6.1.2
-  i386: ghcr.io/hassio-addons/debian-base/i386:6.1.2
-  armv7: ghcr.io/hassio-addons/debian-base/armv7:6.1.2
-  aarch64: ghcr.io/hassio-addons/debian-base/aarch64:6.1.2
