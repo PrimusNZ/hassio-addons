@@ -1,3 +1,6 @@
 [submodule "mycroftai"]
 	path = mycroftai
 	url = https://github.com/PrimusNZ/addon-mycroftai
+[submodule "growatt-interrogator"]
+	path = growatt-interrogator
+	url = https://github.com/PrimusNZ/addon-growatt-interrogator
