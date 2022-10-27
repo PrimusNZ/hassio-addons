@@ -1,0 +1,3 @@
+[submodule "addon-mycroftai"]
+	path = addon-mycroftai
+	url = https://github.com/PrimusNZ/addon-mycroftai
