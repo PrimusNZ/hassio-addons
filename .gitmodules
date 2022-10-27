@@ -1,0 +1,3 @@
+[submodule "mycroftai"]
+	path = mycroftai
+	url = git@github.com:PrimusNZ/addon-mycroftai.git
