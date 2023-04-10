@@ -3,4 +3,4 @@
 	url = https://github.com/PrimusNZ/addon-growatt-interrogator
 [submodule "hvac-ip-mqtt-bridge"]
 	path = hvac-ip-mqtt-bridge
-	url = git@github.com:PrimusNZ/addon-hvac-ip-mqtt-bridge.git
+	url = https://github.com/PrimusNZ/addon-hvac-ip-mqtt-bridge.git
