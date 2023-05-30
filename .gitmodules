@@ -4,3 +4,6 @@
 [submodule "hvac-ip-mqtt-bridge"]
 	path = hvac-ip-mqtt-bridge
 	url = https://github.com/PrimusNZ/addon-hvac-ip-mqtt-bridge.git
+[submodule "addon-jellyfin"]
+	path = addon-jellyfin
+	url = https://github.com/PrimusNZ/addon-jellyfin.git
