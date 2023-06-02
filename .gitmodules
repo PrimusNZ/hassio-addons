@@ -7,3 +7,6 @@
 [submodule "addon-jellyfin"]
 	path = addon-jellyfin
 	url = https://github.com/PrimusNZ/addon-jellyfin.git
+[submodule "sonarr"]
+	path = sonarr
+	url = https://github.com/PrimusNZ/addon-sonarr.git
