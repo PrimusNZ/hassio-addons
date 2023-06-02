@@ -10,3 +10,6 @@
 [submodule "sonarr"]
 	path = sonarr
 	url = https://github.com/PrimusNZ/addon-sonarr.git
+[submodule "addon-radarr"]
+	path = addon-radarr
+	url = https://github.com/PrimusNZ/addon-radarr.git
