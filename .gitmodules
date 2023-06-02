@@ -13,3 +13,9 @@
 [submodule "addon-radarr"]
 	path = addon-radarr
 	url = https://github.com/PrimusNZ/addon-radarr.git
+[submodule "addon-jackett"]
+	path = addon-jackett
+	url = https://github.com/PrimusNZ/addon-jackett.git
+[submodule "addon-transmission-openvpn"]
+	path = addon-transmission-openvpn
+	url = https://github.com/PrimusNZ/addon-transmission-openvpn.git
