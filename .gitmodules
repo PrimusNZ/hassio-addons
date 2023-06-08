@@ -19,3 +19,6 @@
 [submodule "addon-transmission-openvpn"]
 	path = addon-transmission-openvpn
 	url = https://github.com/PrimusNZ/addon-transmission-openvpn.git
+[submodule "addon-sabnzbd"]
+	path = addon-sabnzbd
+	url = https://github.com/PrimusNZ/addon-sabnzbd.git
