@@ -22,3 +22,6 @@
 [submodule "addon-sabnzbd"]
 	path = addon-sabnzbd
 	url = https://github.com/PrimusNZ/addon-sabnzbd.git
+[submodule "addon-lidarr"]
+	path = addon-lidarr
+	url = https://github.com/PrimusNZ/addon-lidarr.git
