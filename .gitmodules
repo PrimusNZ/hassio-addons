@@ -25,3 +25,6 @@
 [submodule "addon-lidarr"]
 	path = addon-lidarr
 	url = https://github.com/PrimusNZ/addon-lidarr.git
+[submodule "addon-ispy-agent"]
+	path = addon-ispy-agent
+	url = https://github.com/PrimusNZ/addon-ispy-agent.git
