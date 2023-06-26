@@ -5,26 +5,26 @@
 	path = hvac-ip-mqtt-bridge
 	url = https://github.com/PrimusNZ/addon-hvac-ip-mqtt-bridge.git
 [submodule "addon-jellyfin"]
-	path = addon-jellyfin
+	path = jellyfin
 	url = https://github.com/PrimusNZ/addon-jellyfin.git
 [submodule "sonarr"]
 	path = sonarr
 	url = https://github.com/PrimusNZ/addon-sonarr.git
 [submodule "addon-radarr"]
-	path = addon-radarr
+	path = radarr
 	url = https://github.com/PrimusNZ/addon-radarr.git
 [submodule "addon-jackett"]
-	path = addon-jackett
+	path = jackett
 	url = https://github.com/PrimusNZ/addon-jackett.git
 [submodule "addon-transmission-openvpn"]
-	path = addon-transmission-openvpn
+	path = transmission-openvpn
 	url = https://github.com/PrimusNZ/addon-transmission-openvpn.git
 [submodule "addon-sabnzbd"]
-	path = addon-sabnzbd
+	path = sabnzbd
 	url = https://github.com/PrimusNZ/addon-sabnzbd.git
 [submodule "addon-lidarr"]
-	path = addon-lidarr
+	path = lidarr
 	url = https://github.com/PrimusNZ/addon-lidarr.git
 [submodule "addon-blueiris"]
-	path = addon-blueiris
+	path = blueiris
 	url = https://github.com/PrimusNZ/addon-blueiris.git
