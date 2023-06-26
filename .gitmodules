@@ -25,9 +25,6 @@
 [submodule "addon-lidarr"]
 	path = addon-lidarr
 	url = https://github.com/PrimusNZ/addon-lidarr.git
-[submodule "addon-ispy-agent"]
-	path = addon-ispy-agent
-	url = https://github.com/PrimusNZ/addon-ispy-agent.git
 [submodule "addon-blueiris"]
 	path = addon-blueiris
 	url = https://github.com/PrimusNZ/addon-blueiris.git
