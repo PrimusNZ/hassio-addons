@@ -7,7 +7,7 @@
 [submodule "addon-jellyfin"]
 	path = jellyfin
 	url = https://github.com/PrimusNZ/addon-jellyfin.git
-[submodule "sonarr"]
+[submodule "addon-sonarr"]
 	path = sonarr
 	url = https://github.com/PrimusNZ/addon-sonarr.git
 [submodule "addon-radarr"]
@@ -25,9 +25,6 @@
 [submodule "addon-lidarr"]
 	path = lidarr
 	url = https://github.com/PrimusNZ/addon-lidarr.git
-[submodule "addon-blueiris"]
-	path = blueiris
-	url = https://github.com/PrimusNZ/addon-blueiris.git
 [submodule "addon-prowlarr"]
 	path = prowlarr
 	url = https://github.com/PrimusNZ/addon-prowlarr.git
