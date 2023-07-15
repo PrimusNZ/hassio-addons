@@ -28,3 +28,6 @@
 [submodule "addon-blueiris"]
 	path = blueiris
 	url = https://github.com/PrimusNZ/addon-blueiris.git
+[submodule "addon-prowlarr"]
+	path = addon-prowlarr
+	url = https://github.com/PrimusNZ/addon-prowlarr.git
