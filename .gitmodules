@@ -28,3 +28,6 @@
 [submodule "addon-prowlarr"]
 	path = prowlarr
 	url = https://github.com/PrimusNZ/addon-prowlarr.git
+[submodule "mysql-cron-backup"]
+	path = mysql-cron-backup
+	url = https://github.com/PrimusNZ/addon-mysql-cron-backup.git
