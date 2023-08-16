@@ -31,3 +31,6 @@
 [submodule "mysql-cron-backup"]
 	path = mysql-cron-backup
 	url = https://github.com/PrimusNZ/addon-mysql-cron-backup.git
+[submodule "kvm"]
+	path = kvm
+	url = https://github.com/PrimusNZ/addon-kvm.git
