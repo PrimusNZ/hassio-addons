@@ -31,3 +31,6 @@
 [submodule "mysql-cron-backup"]
 	path = mysql-cron-backup
 	url = https://github.com/PrimusNZ/addon-mysql-cron-backup.git
+[submodule "homarr"]
+	path = homarr
+	url = https://github.com/PrimusNZ/addon-homarr.git
