@@ -34,3 +34,6 @@
 [submodule "homarr"]
 	path = homarr
 	url = https://github.com/PrimusNZ/addon-homarr.git
+[submodule "overseerr"]
+	path = overseerr
+	url = https://github.com/PrimusNZ/addon-overseer.git
